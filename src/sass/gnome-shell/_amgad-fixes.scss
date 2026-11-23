@@ -21,3 +21,103 @@
   border-radius: 16px;
   box-shadow: 0 0 22px 3px rgba(10, 132, 255, 0.55);
 }
+
+// Quick Settings: macOS Control Center look. Rounded-rectangle tiles that stay
+// neutral, with the icon in a circle that turns blue when the toggle is on;
+// thick white sliders; round header buttons.
+$cc_blue: #0a84ff;
+$cc_panel: if($variant == 'light', rgba(246, 246, 246, 0.82), rgba(30, 30, 32, 0.78));
+$cc_tile: if($variant == 'light', rgba(0, 0, 0, 0.06), rgba(255, 255, 255, 0.10));
+$cc_tile_hover: if($variant == 'light', rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.16));
+$cc_bubble: if($variant == 'light', rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.16));
+$cc_text: if($variant == 'light', rgba(0, 0, 0, 0.88), rgba(255, 255, 255, 0.95));
+$cc_subtext: if($variant == 'light', rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.55));
+$cc_edge: if($variant == 'light', rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.12));
+$cc_track: if($variant == 'light', rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.14));
+$cc_fill: if($variant == 'light', #ffffff, #ffffff);
+
+.quick-settings {
+  background-color: $cc_panel !important;
+  border: 1px solid $cc_edge !important;
+  border-radius: 26px !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.quick-settings-grid {
+  spacing-rows: 10px;
+  spacing-columns: 10px;
+}
+
+.quick-settings .quick-toggle,
+.quick-settings .quick-toggle-has-menu .quick-toggle,
+.quick-settings .quick-toggle-has-menu .quick-toggle-menu-button {
+  background-color: $cc_tile !important;
+  color: $cc_text !important;
+  border-radius: 16px;
+  min-height: 56px;
+
+  &:hover { background-color: $cc_tile_hover !important; }
+  &:checked, &:checked:hover, &:checked:active {
+    background-color: $cc_tile !important;
+    color: $cc_text !important;
+  }
+}
+
+.quick-settings .quick-toggle-has-menu .quick-toggle {
+  &:ltr { border-radius: 16px 0 0 16px; }
+  &:rtl { border-radius: 0 16px 16px 0; }
+  &:ltr:last-child, &:rtl:last-child { border-radius: 16px; }
+}
+
+.quick-settings .quick-toggle-has-menu .quick-toggle-menu-button {
+  &:ltr { border-radius: 0 16px 16px 0; }
+  &:rtl { border-radius: 16px 0 0 16px; }
+}
+
+.quick-settings .quick-toggle {
+  &:ltr > StBoxLayout { padding-left: 10px; }
+  &:rtl > StBoxLayout { padding-right: 10px; }
+  & > StBoxLayout { spacing: 10px; }
+
+  .quick-toggle-icon {
+    icon-size: 16px;
+    padding: 9px;
+    border-radius: 9999px;
+    background-color: $cc_bubble;
+    color: $cc_text;
+  }
+
+  &:checked .quick-toggle-icon {
+    background-color: $cc_blue;
+    color: #ffffff;
+  }
+
+  .quick-toggle-title { font-weight: 600; font-size: 10.5pt; }
+  .quick-toggle-subtitle { color: $cc_subtext; font-size: 9pt; }
+}
+
+.quick-settings .quick-slider {
+  background-color: $cc_tile;
+  border-radius: 16px;
+  padding: 6px 10px;
+
+  .slider {
+    -slider-height: 22px;
+    -slider-background-color: $cc_track;
+    -slider-active-background-color: $cc_fill;
+    -slider-border-width: 0;
+    -slider-handle-radius: 11px;
+    -slider-handle-border-width: 0;
+    color: $cc_fill;
+    height: 22px;
+  }
+
+  .slider-bin { padding: 0 4px; }
+}
+
+.quick-settings .quick-settings-system-item .icon-button {
+  background-color: $cc_tile !important;
+  border-radius: 9999px;
+
+  &:hover { background-color: $cc_tile_hover !important; }
+}
