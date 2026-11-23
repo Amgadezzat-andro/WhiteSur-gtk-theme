@@ -1,43 +1,37 @@
 #!/usr/bin/env bash
-# Replace the Ubuntu logo with the Apple logo, in a way package updates don't undo.
+# Replace the Ubuntu logo in Settings > About and on the login screen with the
+# Apple logo, in a way package updates don't undo. Needs sudo.
 #
-#   ./install-branding.sh            Settings > About (user only, no sudo)
-#   ./install-branding.sh --system   also the login screen (asks for sudo)
-#   ./install-branding.sh --remove   undo both
+#   ./install-branding.sh            install
+#   ./install-branding.sh --remove   restore Ubuntu's logos
 #
-# Settings > About looks up the os-release LOGO ("ubuntu-logo") as an icon, and
-# the user's icon directory wins over /usr/share/pixmaps. The login screen reads
-# a file path from org.gnome.login-screen logo, which we point at /usr/local.
+# Ubuntu's Settings and the login screen read these exact files from the
+# base-files package. dpkg-divert moves the originals to *.distrib, so updates
+# to base-files write there instead of overwriting the Apple logo.
 set -e
 
 here=$(cd "$(dirname "$0")" && pwd)/branding
-icons="$HOME/.local/share/icons/hicolor/scalable/apps"
-system_logo=/usr/local/share/pixmaps/apple-logo-text-dark.svg
-greeter=/etc/gdm3/greeter.dconf-defaults
-logo_line="logo='$system_logo'"
+dir=/usr/share/pixmaps
+declare -A logos=(
+    [ubuntu-logo-text-dark.svg]=apple-logo-white.svg
+    [ubuntu-logo-text.svg]=apple-logo-black.svg
+)
 
 if [[ "$1" == "--remove" ]]; then
-    rm -f "$icons"/ubuntu-logo{,-text,-text-dark}.svg
-    if grep -qxF "$logo_line" "$greeter" 2>/dev/null; then
-        sudo sed -i "\|^$logo_line\$|d" "$greeter"
-        sudo rm -f "$system_logo"
-        sudo /usr/share/gdm/generate-config
-    fi
-    echo "Removed. Reopen Settings; the login screen changes at your next log out."
+    for name in "${!logos[@]}"; do
+        if dpkg-divert --list "$dir/$name" | grep -q .; then
+            sudo rm -f "$dir/$name"
+            sudo dpkg-divert --local --rename --remove "$dir/$name"
+        fi
+    done
+    echo "Ubuntu logos restored. Reopen Settings; the login screen changes at your next log out."
     exit 0
 fi
 
-mkdir -p "$icons"
-cp "$here/apple-logo-white.svg" "$icons/ubuntu-logo-text-dark.svg"
-cp "$here/apple-logo-black.svg" "$icons/ubuntu-logo-text.svg"
-cp "$here/apple-logo-black.svg" "$icons/ubuntu-logo.svg"
-echo "Settings > About: done (reopen Settings)."
-
-if [[ "$1" == "--system" ]]; then
-    sudo install -Dm644 "$here/apple-logo-white.svg" "$system_logo"
-    if ! grep -qxF "$logo_line" "$greeter"; then
-        sudo sed -i "\|^\[org/gnome/login-screen\]\$|a $logo_line" "$greeter"
+for name in "${!logos[@]}"; do
+    if ! dpkg-divert --list "$dir/$name" | grep -q .; then
+        sudo dpkg-divert --local --rename --add "$dir/$name"
     fi
-    sudo /usr/share/gdm/generate-config
-    echo "Login screen: done (shows at your next log out)."
-fi
+    sudo install -m644 "$here/${logos[$name]}" "$dir/$name"
+done
+echo "Done. Reopen Settings; the login screen changes at your next log out."
