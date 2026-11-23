@@ -1,0 +1,14 @@
+// Local fixes on top of upstream WhiteSur. Imported last from
+// src/main/gnome-shell/_shell-base.scss so they override the theme.
+
+// Overview: keep window titles above the dock and make them readable.
+.window-picker { padding-bottom: 130px; }
+
+.window-caption {
+  background-color: rgba(0, 0, 0, 0.92);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  padding: 5px 12px;
+  font-weight: 500;
+}
