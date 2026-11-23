@@ -1,0 +1,8 @@
+{
+  "uuid": "overview-hover-border@amgad",
+  "name": "Overview Hover Border",
+  "description": "In the Activities Overview, draws a glowing rounded border around the hovered window that fades in and follows GNOME's zoom animation.",
+  "shell-version": ["46", "47", "48", "49", "50"],
+  "url": "https://github.com/Amgadezzat-andro",
+  "version-name": "1.0"
+}

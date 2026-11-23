@@ -12,3 +12,12 @@
   padding: 5px 12px;
   font-weight: 500;
 }
+
+// Overview: border around the hovered window. Drawn by the
+// overview-hover-border@amgad extension (extras/ in this repo); the theme
+// only styles it.
+.amgad-hover-border {
+  border: 3px solid rgba(10, 132, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 0 22px 3px rgba(10, 132, 255, 0.55);
+}
