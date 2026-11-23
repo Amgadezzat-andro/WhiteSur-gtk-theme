@@ -27,7 +27,9 @@
 // Neutral "on" tiles: widgets-48-0/_quick-settings.scss. White sliders:
 // common/_slider.scss.
 $cc_blue: #0a84ff;
-$cc_panel: if($variant == 'light', rgba(246, 246, 246, 0.82), rgba(30, 30, 32, 0.78));
+// Nearly opaque: GNOME doesn't blur behind Quick Settings, so see-through text
+// from the window behind would show.
+$cc_panel: if($variant == 'light', rgba(246, 246, 246, 0.97), rgba(30, 30, 32, 0.97));
 $cc_tile: if($variant == 'light', rgba(0, 0, 0, 0.06), rgba(255, 255, 255, 0.10));
 $cc_tile_hover: if($variant == 'light', rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.16));
 $cc_bubble: if($variant == 'light', rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.16));
