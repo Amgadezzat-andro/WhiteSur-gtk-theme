@@ -35,26 +35,11 @@
   }
 
   &:checked {
-    background-color: $primary_color !important;
-    color: $light_fg_color;
-
-    &:hover {
-      color: $light_fg_color;
-      @if $shell_version == 'old' {
-        background-color: mix($text_color, $primary_color, 6%) !important;
-      } @else {
-        background-color: st-mix($text_color, $primary_color, 6%) !important;
-      }
-    }
-
-    &:active {
-      color: $light_fg_color;
-      @if $shell_version == 'old' {
-        background-color: mix($text_color, $primary_color, 15%) !important;
-      } @else {
-        background-color: st-mix($text_color, $primary_color, 15%) !important;
-      }
-    }
+    // Mac Control Center: the tile stays neutral when on; the icon circle
+    // turns blue instead (see _amgad-fixes.scss).
+    background-color: $fill_color !important;
+    &:hover { background-color: $divider_color !important; }
+    &:active { background-color: $visit_color !important; }
   }
 
   & > StBoxLayout { spacing: $base_padding * 1.5; }
@@ -106,26 +91,10 @@
     }
   
     &:checked {
-      background-color: $primary_color !important;
-      color: $light_fg_color;
-  
-      &:hover {
-        color: $light_fg_color;
-        @if $shell_version == 'old' {
-          background-color: mix($text_color, $primary_color, 6%) !important;
-        } @else {
-          background-color: st-mix($text_color, $primary_color, 6%) !important;
-        }
-      }
-  
-      &:active {
-        color: $light_fg_color;
-        @if $shell_version == 'old' {
-          background-color: mix($text_color, $primary_color, 15%) !important;
-        } @else {
-          background-color: st-mix($text_color, $primary_color, 15%) !important;
-        }
-      }
+      // Neutral when on, matching the toggle tile (Mac Control Center).
+      background-color: $fill_color !important;
+      &:hover { background-color: $divider_color !important; }
+      &:active { background-color: $visit_color !important; }
     }
 
     &:ltr {

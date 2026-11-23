@@ -22,9 +22,10 @@
   box-shadow: 0 0 22px 3px rgba(10, 132, 255, 0.55);
 }
 
-// Quick Settings: macOS Control Center look. Rounded-rectangle tiles that stay
-// neutral, with the icon in a circle that turns blue when the toggle is on;
-// thick white sliders; round header buttons.
+// Quick Settings: macOS Control Center look. Rounded-rectangle tiles, the icon
+// in a circle that turns blue when the toggle is on, round header buttons.
+// Neutral "on" tiles: widgets-48-0/_quick-settings.scss. White sliders:
+// common/_slider.scss.
 $cc_blue: #0a84ff;
 $cc_panel: if($variant == 'light', rgba(246, 246, 246, 0.82), rgba(30, 30, 32, 0.78));
 $cc_tile: if($variant == 'light', rgba(0, 0, 0, 0.06), rgba(255, 255, 255, 0.10));
@@ -33,8 +34,6 @@ $cc_bubble: if($variant == 'light', rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.1
 $cc_text: if($variant == 'light', rgba(0, 0, 0, 0.88), rgba(255, 255, 255, 0.95));
 $cc_subtext: if($variant == 'light', rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.55));
 $cc_edge: if($variant == 'light', rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.12));
-$cc_track: if($variant == 'light', rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.14));
-$cc_fill: if($variant == 'light', #ffffff, #ffffff);
 
 .quick-settings {
   background-color: $cc_panel !important;
@@ -57,10 +56,6 @@ $cc_fill: if($variant == 'light', #ffffff, #ffffff);
   min-height: 56px;
 
   &:hover { background-color: $cc_tile_hover !important; }
-  &:checked, &:checked:hover, &:checked:active {
-    background-color: $cc_tile !important;
-    color: $cc_text !important;
-  }
 }
 
 .quick-settings .quick-toggle-has-menu .quick-toggle {
@@ -101,16 +96,6 @@ $cc_fill: if($variant == 'light', #ffffff, #ffffff);
   border-radius: 16px;
   padding: 6px 10px;
 
-  .slider {
-    -slider-height: 22px;
-    -slider-background-color: $cc_track;
-    -slider-active-background-color: $cc_fill;
-    -slider-border-width: 0;
-    -slider-handle-radius: 11px;
-    -slider-handle-border-width: 0;
-    color: $cc_fill;
-    height: 22px;
-  }
 
   .slider-bin { padding: 0 4px; }
 }
