@@ -1,8 +1,9 @@
 // Local fixes on top of upstream WhiteSur. Imported last from
 // src/main/gnome-shell/_shell-base.scss so they override the theme.
 
-// Overview: keep window titles above the dock and make them readable.
-.window-picker { padding-bottom: 80px; }
+// Overview: readable window titles. Keeping them above the dock is done by the
+// overview-hover-border@amgad extension (extras/), which pads the window view
+// only; a padding here would also squeeze the small workspace in the app grid.
 
 .window-caption {
   background-color: rgba(0, 0, 0, 0.92);
