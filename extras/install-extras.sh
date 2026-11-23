@@ -13,8 +13,3 @@ for ext in "$here"/*@*/; do
     gnome-extensions enable "$uuid" 2>/dev/null ||
         echo "$uuid installed; it turns on after you log out and back in."
 done
-
-python3 - <<'PY'
-import ast, os, subprocess
-uuids = [d for d in os.listdir(os.path.dirname(os.path.abspath(__file__)) if False else ".") if "@" in d]
-PY
