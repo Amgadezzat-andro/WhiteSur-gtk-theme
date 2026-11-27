@@ -128,8 +128,8 @@ $panel_height: $menuitem_size;
 
   // panel menus
   .panel-button {
-    -natural-hpadding: 12px;
-    -minimum-hpadding: 12px;
+    -natural-hpadding: 8px; // tighter, like the macOS menu bar
+    -minimum-hpadding: 4px; // lets icons squeeze together instead of overflowing off-screen
     color: $panel_fg;
     transition-duration: 150ms;
     border-radius: $bt_radius;
@@ -231,7 +231,7 @@ $panel_height: $menuitem_size;
     // status area icons
     .system-status-icon {
       icon-size: $base_icon_size;
-      padding: $base_padding;
+      padding: $base_padding $base_padding / 2; // tighter sides so a full top bar fits
       margin: 0;
     }
 
@@ -327,8 +327,8 @@ $panel_height: $menuitem_size;
   Gjs_status_keyboard_InputSourceIndicator.panel-button, // Ibus
   Gjs_appindicatorsupport_rgcjonas_gmail_com_indicatorStatusIcon_IndicatorStatusIcon.panel-button,
   Gjs_appindicatorsupport_rgcjonas_gmail_com_indicatorStatusIcon_AppIndicatorsIndicatorStatusIcon.panel-button { // Fcitx
-    -natural-hpadding: 12px + $base_padding !important;
-    -minimum-hpadding: 12px + $base_padding !important;
+    -natural-hpadding: 8px !important; // tighter tray icons, like the macOS menu bar
+    -minimum-hpadding: 4px !important; // same: shrink when the top bar is full
   }
 
   // transparent panel on lock & login screens
